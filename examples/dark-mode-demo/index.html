@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Mode Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <script>
+        // Dark mode initialization
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+
+        function toggleDarkMode() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+                updateToggleButton(false);
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+                updateToggleButton(true);
+            }
+        }
+
+        function updateToggleButton(isDark) {
+            const button = document.getElementById('darkModeToggle');
+            const icon = document.getElementById('toggleIcon');
+            const text = document.getElementById('toggleText');
+            
+            if (isDark) {
+                icon.innerHTML = '☀️';
+                text.textContent = 'Light Mode';
+                button.classList.remove('bg-gray-200', 'text-gray-800');
+                button.classList.add('bg-yellow-400', 'text-gray-900');
+            } else {
+                icon.innerHTML = '🌙';
+                text.textContent = 'Dark Mode';
+                button.classList.remove('bg-yellow-400', 'text-gray-900');
+                button.classList.add('bg-gray-200', 'text-gray-800');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const isDark = document.documentElement.classList.contains('dark');
+            updateToggleButton(isDark);
+            
+            const toggleButton = document.getElementById('darkModeToggle');
+            if (toggleButton) {
+                toggleButton.addEventListener('click', toggleDarkMode);
+            }
+        });
+    </script>
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
+    <div class="min-h-screen">
+        <!-- Header -->
+        <header class="bg-white dark:bg-gray-800 shadow-md dark:shadow-gray-700/50 transition-colors duration-300">
+            <div class="container mx-auto px-4 py-6">
+                <div class="flex justify-between items-center">
+                    <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
+                        Dark Mode Showcase
+                    </h1>
+                    <button id="darkModeToggle" 
+                            class="flex items-center space-x-2 px-4 py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-800">
+                        <span id="toggleIcon">🌙</span>
+                        <span id="toggleText">Dark Mode</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container mx-auto px-4 py-8">
+            <!-- Hero Section -->
+            <section class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
+                    Beautiful Dark Mode Implementation
+                </h2>
+                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                    Experience seamless theme switching with smooth transitions and carefully crafted color schemes.
+                </p>
+            </section>
+
+            <!-- Feature Cards -->
+            <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg dark:shadow-gray-700/50 p-6 transition-all duration-300 hover:shadow-xl dark:hover:shadow-gray-600/50 hover:scale-105">
+                    <div class="w-12 h-12 bg-blue-500 dark:bg-blue-400 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-white text-xl">🎨</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Adaptive Colors</h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Colors automatically adjust to provide optimal contrast and readability in both themes.
+                    </p>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg dark:shadow-gray-700/50 p-6 transition-all duration-300 hover:shadow-xl dark:hover:shadow-gray-600/50 hover:scale-105">
+                    <div class="w-12 h-12 bg-green-500 dark:bg-green-400 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-white text-xl">⚡</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Smooth Transitions</h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        All color changes are animated with smooth transitions for a polished user experience.
+                    </p>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg dark:shadow-gray-700/50 p-6 transition-all duration-300 hover:shadow-xl dark:hover:shadow-gray-600/50 hover:scale-105">
+                    <div class="w-12 h-12 bg-purple-500 dark:bg-purple-400 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-white text-xl">💾</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Persistent Preference</h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Your theme preference is saved and remembered across browser sessions.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Interactive Elements -->
+            <section class="bg-gray-50 dark:bg-gray-800 rounded-lg p-8 mb-12 transition-colors duration-300">
+                <h3 class="text-2xl font-bold mb-6 text-center text-gray-900 dark:text-white">Interactive Elements</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Form Section -->
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Sample Form</h4>
+                        <form class="space-y-4">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
+                                <input type="text" id="name" 
+                                       class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-colors duration-200">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+                                <input type="email" id="email" 
+                                       class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-colors duration-200">
+                            </div>
+                            <button type="submit" 
+                                    class="w-full bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-800">
+                                Submit
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Buttons Section -->
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Button Variations</h4>
+                        <div class="space-y-3">
+                            <button class="w-full bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md transition-colors duration-200">
+                                Primary Button
+                            </button>
+                            <button class="w-full bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 text-gray-900 dark:text-white font-semibold py-2 px-4 rounded-md transition-colors duration-200">
+                                Secondary Button
+                            </button>
+                            <button class="w-full border border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 hover:bg-blue-600 dark:hover:bg-blue-400 hover:text-white font-semibold py-2 px-4 rounded-md transition-colors duration-200">
+                                Outline Button
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Code Example -->
+            <section class="bg-white dark:bg-gray-800 rounded-lg shadow-lg dark:shadow-gray-700/50 p-6 transition-colors duration-300">
+                <h3 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Implementation Example</h3>
+                <div class="bg-gray-100 dark:bg-gray-900 rounded-md p-4 overflow-x-auto">
+                    <pre class="text-sm text-gray-800 dark:text-gray-200"><code>&lt;div class="bg-white dark:bg-gray-800 text-gray-900 dark:text-white"&gt;
+  &lt;h1 class="text-2xl font-bold"&gt;Dark Mode Content&lt;/h1&gt;
+  &lt;p class="text-gray-600 dark:text-gray-300"&gt;
+    This content adapts to the current theme.
+  &lt;/p&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+                <p class="mt-4 text-sm text-gray-600 dark:text-gray-400">
+                    Use the <code class="bg-gray-200 dark:bg-gray-700 px-1 rounded">dark:</code> prefix to apply styles only in dark mode.
+                </p>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-100 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 transition-colors duration-300">
+            <div class="container mx-auto px-4 py-8">
+                <div class="text-center">
+                    <p class="text-gray-600 dark:text-gray-400">
+                        © 2024 Dark Mode Demo. Built with Tailwind CSS.
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
+

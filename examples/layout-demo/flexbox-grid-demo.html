@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tailwind CSS Layout Demo - Flexbox & Grid</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <h1 class="text-5xl font-extrabold text-gray-800 mb-4">
+                📐 Layout Mastery Demo
+            </h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                Explore Tailwind's powerful Flexbox and Grid utilities with interactive examples. 
+                Click the buttons to see different layout configurations in action!
+            </p>
+        </header>
+
+        <!-- Flexbox Demo Section -->
+        <section class="bg-white rounded-2xl shadow-2xl p-8 mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Interactive Flexbox Demo</h2>
+            
+            <!-- Flexbox Container -->
+            <div id="flexContainer" class="flex justify-center items-center bg-blue-50 border-2 border-blue-200 rounded-lg p-6 mb-8 min-h-64">
+                <div class="bg-red-500 text-white p-4 rounded-lg m-2 font-semibold">Item 1</div>
+                <div class="bg-green-500 text-white p-4 rounded-lg m-2 font-semibold">Item 2</div>
+                <div class="bg-blue-500 text-white p-4 rounded-lg m-2 font-semibold">Item 3</div>
+                <div class="bg-purple-500 text-white p-4 rounded-lg m-2 font-semibold">Item 4</div>
+            </div>
+
+            <!-- Flexbox Controls -->
+            <div class="space-y-6">
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-3">Flex Direction:</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="updateFlex('flex-row')" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors">
+                            flex-row
+                        </button>
+                        <button onclick="updateFlex('flex-col')" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors">
+                            flex-col
+                        </button>
+                        <button onclick="updateFlex('flex-row-reverse')" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors">
+                            flex-row-reverse
+                        </button>
+                        <button onclick="updateFlex('flex-col-reverse')" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors">
+                            flex-col-reverse
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-3">Justify Content:</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="updateJustify('justify-start')" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-colors">
+                            justify-start
+                        </button>
+                        <button onclick="updateJustify('justify-center')" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-colors">
+                            justify-center
+                        </button>
+                        <button onclick="updateJustify('justify-end')" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-colors">
+                            justify-end
+                        </button>
+                        <button onclick="updateJustify('justify-between')" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-colors">
+                            justify-between
+                        </button>
+                        <button onclick="updateJustify('justify-around')" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-colors">
+                            justify-around
+                        </button>
+                        <button onclick="updateJustify('justify-evenly')" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-colors">
+                            justify-evenly
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-3">Align Items:</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="updateAlign('items-start')" class="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg transition-colors">
+                            items-start
+                        </button>
+                        <button onclick="updateAlign('items-center')" class="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg transition-colors">
+                            items-center
+                        </button>
+                        <button onclick="updateAlign('items-end')" class="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg transition-colors">
+                            items-end
+                        </button>
+                        <button onclick="updateAlign('items-stretch')" class="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg transition-colors">
+                            items-stretch
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Current Flexbox Classes Display -->
+            <div class="mt-6 p-4 bg-gray-100 rounded-lg">
+                <h4 class="font-bold text-gray-800 mb-2">Current Flexbox Classes:</h4>
+                <code id="flexClasses" class="text-sm text-gray-700 bg-white p-2 rounded border">
+                    flex justify-center items-center
+                </code>
+            </div>
+        </section>
+
+        <!-- Grid Demo Section -->
+        <section class="bg-white rounded-2xl shadow-2xl p-8 mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Interactive Grid Demo</h2>
+            
+            <!-- Grid Container -->
+            <div id="gridContainer" class="grid grid-cols-3 gap-4 bg-green-50 border-2 border-green-200 rounded-lg p-6 mb-8">
+                <div class="bg-red-500 text-white p-4 rounded-lg text-center font-semibold">1</div>
+                <div class="bg-blue-500 text-white p-4 rounded-lg text-center font-semibold">2</div>
+                <div class="bg-green-500 text-white p-4 rounded-lg text-center font-semibold">3</div>
+                <div class="bg-yellow-500 text-white p-4 rounded-lg text-center font-semibold">4</div>
+                <div class="bg-purple-500 text-white p-4 rounded-lg text-center font-semibold">5</div>
+                <div class="bg-pink-500 text-white p-4 rounded-lg text-center font-semibold">6</div>
+                <div class="bg-indigo-500 text-white p-4 rounded-lg text-center font-semibold">7</div>
+                <div class="bg-gray-500 text-white p-4 rounded-lg text-center font-semibold">8</div>
+                <div class="bg-orange-500 text-white p-4 rounded-lg text-center font-semibold">9</div>
+            </div>
+
+            <!-- Grid Controls -->
+            <div class="space-y-6">
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-3">Grid Columns:</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="updateGridCols('grid-cols-1')" class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg transition-colors">
+                            grid-cols-1
+                        </button>
+                        <button onclick="updateGridCols('grid-cols-2')" class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg transition-colors">
+                            grid-cols-2
+                        </button>
+                        <button onclick="updateGridCols('grid-cols-3')" class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg transition-colors">
+                            grid-cols-3
+                        </button>
+                        <button onclick="updateGridCols('grid-cols-4')" class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg transition-colors">
+                            grid-cols-4
+                        </button>
+                        <button onclick="updateGridCols('grid-cols-5')" class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg transition-colors">
+                            grid-cols-5
+                        </button>
+                        <button onclick="updateGridCols('grid-cols-6')" class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg transition-colors">
+                            grid-cols-6
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-3">Gap Size:</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="updateGridGap('gap-0')" class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition-colors">
+                            gap-0
+                        </button>
+                        <button onclick="updateGridGap('gap-2')" class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition-colors">
+                            gap-2
+                        </button>
+                        <button onclick="updateGridGap('gap-4')" class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition-colors">
+                            gap-4
+                        </button>
+                        <button onclick="updateGridGap('gap-6')" class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition-colors">
+                            gap-6
+                        </button>
+                        <button onclick="updateGridGap('gap-8')" class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition-colors">
+                            gap-8
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Current Grid Classes Display -->
+            <div class="mt-6 p-4 bg-gray-100 rounded-lg">
+                <h4 class="font-bold text-gray-800 mb-2">Current Grid Classes:</h4>
+                <code id="gridClasses" class="text-sm text-gray-700 bg-white p-2 rounded border">
+                    grid grid-cols-3 gap-4
+                </code>
+            </div>
+        </section>
+
+        <!-- Responsive Layout Demo -->
+        <section class="bg-white rounded-2xl shadow-2xl p-8 mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Responsive Layout Example</h2>
+            <p class="text-center text-gray-600 mb-8">This layout adapts automatically based on screen size!</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div class="bg-gradient-to-br from-red-400 to-red-600 text-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-bold mb-2">Card 1</h3>
+                    <p class="text-red-100">Always visible on all screen sizes</p>
+                </div>
+                <div class="bg-gradient-to-br from-blue-400 to-blue-600 text-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-bold mb-2">Card 2</h3>
+                    <p class="text-blue-100">2 columns on tablet and up</p>
+                </div>
+                <div class="bg-gradient-to-br from-green-400 to-green-600 text-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-bold mb-2">Card 3</h3>
+                    <p class="text-green-100">3 columns on desktop and up</p>
+                </div>
+                <div class="bg-gradient-to-br from-purple-400 to-purple-600 text-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-bold mb-2">Card 4</h3>
+                    <p class="text-purple-100">4 columns on large screens</p>
+                </div>
+            </div>
+
+            <div class="mt-8 p-4 bg-gray-100 rounded-lg">
+                <h4 class="font-bold text-gray-800 mb-2">Responsive Classes Used:</h4>
+                <code class="text-sm text-gray-700 bg-white p-2 rounded border">
+                    grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4
+                </code>
+            </div>
+        </section>
+
+        <!-- Advanced Layout Patterns -->
+        <section class="bg-white rounded-2xl shadow-2xl p-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Advanced Layout Patterns</h2>
+            
+            <div class="space-y-8">
+                <!-- Holy Grail Layout -->
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-700 mb-4">Holy Grail Layout (Header, Sidebar, Main, Footer)</h3>
+                    <div class="bg-gray-50 border-2 border-gray-200 rounded-lg p-4 h-64">
+                        <div class="h-full flex flex-col">
+                            <header class="bg-blue-500 text-white p-2 rounded mb-2 text-center font-semibold">Header</header>
+                            <div class="flex-1 flex gap-2">
+                                <aside class="bg-green-500 text-white p-2 rounded w-1/4 text-center font-semibold">Sidebar</aside>
+                                <main class="bg-yellow-500 text-white p-2 rounded flex-1 text-center font-semibold">Main Content</main>
+                            </div>
+                            <footer class="bg-red-500 text-white p-2 rounded mt-2 text-center font-semibold">Footer</footer>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Grid with Spanning -->
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-700 mb-4">Grid with Spanning Elements</h3>
+                    <div class="grid grid-cols-4 grid-rows-3 gap-4 h-64">
+                        <div class="bg-red-500 text-white p-4 rounded-lg col-span-2 row-span-2 flex items-center justify-center font-semibold">
+                            col-span-2 row-span-2
+                        </div>
+                        <div class="bg-blue-500 text-white p-4 rounded-lg flex items-center justify-center font-semibold">1</div>
+                        <div class="bg-green-500 text-white p-4 rounded-lg flex items-center justify-center font-semibold">2</div>
+                        <div class="bg-yellow-500 text-white p-4 rounded-lg flex items-center justify-center font-semibold">3</div>
+                        <div class="bg-purple-500 text-white p-4 rounded-lg flex items-center justify-center font-semibold">4</div>
+                        <div class="bg-pink-500 text-white p-4 rounded-lg col-span-2 flex items-center justify-center font-semibold">
+                            col-span-2
+                        </div>
+                        <div class="bg-indigo-500 text-white p-4 rounded-lg flex items-center justify-center font-semibold">5</div>
+                        <div class="bg-gray-500 text-white p-4 rounded-lg flex items-center justify-center font-semibold">6</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        let currentFlexDirection = 'flex-row';
+        let currentJustify = 'justify-center';
+        let currentAlign = 'items-center';
+        let currentGridCols = 'grid-cols-3';
+        let currentGridGap = 'gap-4';
+
+        function updateFlexClasses() {
+            const flexContainer = document.getElementById('flexContainer');
+            const classDisplay = document.getElementById('flexClasses');
+            
+            // Remove all flex classes
+            flexContainer.className = flexContainer.className.replace(/flex-\w+/g, '');
+            flexContainer.className = flexContainer.className.replace(/justify-\w+/g, '');
+            flexContainer.className = flexContainer.className.replace(/items-\w+/g, '');
+            
+            // Add current classes
+            flexContainer.classList.add(currentFlexDirection, currentJustify, currentAlign);
+            
+            // Update display
+            classDisplay.textContent = `flex ${currentFlexDirection} ${currentJustify} ${currentAlign}`;
+        }
+
+        function updateGridClasses() {
+            const gridContainer = document.getElementById('gridContainer');
+            const classDisplay = document.getElementById('gridClasses');
+            
+            // Remove all grid classes
+            gridContainer.className = gridContainer.className.replace(/grid-cols-\d+/g, '');
+            gridContainer.className = gridContainer.className.replace(/gap-\d+/g, '');
+            
+            // Add current classes
+            gridContainer.classList.add(currentGridCols, currentGridGap);
+            
+            // Update display
+            classDisplay.textContent = `grid ${currentGridCols} ${currentGridGap}`;
+        }
+
+        function updateFlex(direction) {
+            currentFlexDirection = direction;
+            updateFlexClasses();
+        }
+
+        function updateJustify(justify) {
+            currentJustify = justify;
+            updateFlexClasses();
+        }
+
+        function updateAlign(align) {
+            currentAlign = align;
+            updateFlexClasses();
+        }
+
+        function updateGridCols(cols) {
+            currentGridCols = cols;
+            updateGridClasses();
+        }
+
+        function updateGridGap(gap) {
+            currentGridGap = gap;
+            updateGridClasses();
+        }
+
+        // Add hover effects to buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Add a brief highlight effect
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 100);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

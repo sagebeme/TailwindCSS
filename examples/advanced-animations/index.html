@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Animations Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'bounce-slow': 'bounce 2s infinite',
+                        'pulse-fast': 'pulse 1s infinite',
+                        'spin-slow': 'spin 3s linear infinite',
+                        'wiggle': 'wiggle 1s ease-in-out infinite',
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                    },
+                    keyframes: {
+                        wiggle: {
+                            '0%, 100%': { transform: 'rotate(-3deg)' },
+                            '50%': { transform: 'rotate(3deg)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(100%)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-purple-400 via-pink-500 to-red-500 min-h-screen p-8">
+    <div class="container mx-auto">
+        <h1 class="text-4xl font-bold text-white text-center mb-12 animate-fade-in">
+            Advanced Animations Showcase
+        </h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Card 1: Hover Transforms -->
+            <div class="bg-white rounded-lg shadow-lg p-6 transform transition-all duration-300 hover:scale-105 hover:rotate-1 hover:shadow-2xl">
+                <div class="w-16 h-16 bg-blue-500 rounded-full mx-auto mb-4 transition-transform duration-500 hover:rotate-180"></div>
+                <h3 class="text-xl font-semibold text-center mb-2">Hover Transforms</h3>
+                <p class="text-gray-600 text-center">Hover over this card to see scale, rotate, and shadow effects.</p>
+            </div>
+
+            <!-- Card 2: Continuous Animations -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex justify-center space-x-4 mb-4">
+                    <div class="w-4 h-4 bg-red-500 rounded-full animate-bounce"></div>
+                    <div class="w-4 h-4 bg-yellow-500 rounded-full animate-bounce-slow"></div>
+                    <div class="w-4 h-4 bg-green-500 rounded-full animate-pulse-fast"></div>
+                </div>
+                <h3 class="text-xl font-semibold text-center mb-2">Continuous Animations</h3>
+                <p class="text-gray-600 text-center">These elements animate continuously with different timing.</p>
+            </div>
+
+            <!-- Card 3: Interactive Button -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <button class="w-full bg-gradient-to-r from-green-400 to-blue-500 text-white font-bold py-3 px-6 rounded-lg transform transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                    <span class="inline-block transition-transform duration-200 hover:animate-wiggle">
+                        Click Me!
+                    </span>
+                </button>
+                <h3 class="text-xl font-semibold text-center mb-2 mt-4">Interactive Button</h3>
+                <p class="text-gray-600 text-center">Click and hover for different effects.</p>
+            </div>
+
+            <!-- Card 4: Loading Spinner -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex justify-center mb-4">
+                    <div class="w-12 h-12 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin"></div>
+                </div>
+                <h3 class="text-xl font-semibold text-center mb-2">Loading Spinner</h3>
+                <p class="text-gray-600 text-center">A classic loading animation using CSS transforms.</p>
+            </div>
+
+            <!-- Card 5: Pulse Effect -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="w-20 h-20 bg-pink-500 rounded-full mx-auto mb-4 animate-ping relative">
+                    <div class="absolute inset-0 bg-pink-500 rounded-full animate-pulse"></div>
+                </div>
+                <h3 class="text-xl font-semibold text-center mb-2">Pulse & Ping</h3>
+                <p class="text-gray-600 text-center">Combining ping and pulse animations for notification effects.</p>
+            </div>
+
+            <!-- Card 6: Complex Animation -->
+            <div class="bg-white rounded-lg shadow-lg p-6 group">
+                <div class="relative overflow-hidden rounded-lg bg-gradient-to-r from-purple-400 to-pink-400 h-32 mb-4">
+                    <div class="absolute inset-0 bg-white opacity-20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-8 h-8 bg-white rounded-full transform group-hover:scale-150 transition-transform duration-500"></div>
+                    </div>
+                </div>
+                <h3 class="text-xl font-semibold text-center mb-2">Complex Animation</h3>
+                <p class="text-gray-600 text-center">Hover to see a shimmer effect with scaling.</p>
+            </div>
+        </div>
+
+        <!-- Animation Controls -->
+        <div class="mt-12 bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-bold text-center mb-6">Animation Controls</h2>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button onclick="triggerAnimation('fade-in')" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors">
+                    Trigger Fade In
+                </button>
+                <button onclick="triggerAnimation('slide-up')" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded transition-colors">
+                    Trigger Slide Up
+                </button>
+                <button onclick="toggleAnimation()" class="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded transition-colors">
+                    Toggle Spin
+                </button>
+            </div>
+            <div id="animationTarget" class="w-24 h-24 bg-yellow-400 rounded-lg mx-auto mt-6 flex items-center justify-center text-white font-bold">
+                Target
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function triggerAnimation(animationClass) {
+            const target = document.getElementById('animationTarget');
+            target.classList.remove('animate-fade-in', 'animate-slide-up');
+            // Force reflow
+            target.offsetHeight;
+            target.classList.add(`animate-${animationClass}`);
+        }
+
+        function toggleAnimation() {
+            const target = document.getElementById('animationTarget');
+            target.classList.toggle('animate-spin-slow');
+        }
+
+        // Add some interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click handlers for cards
+            const cards = document.querySelectorAll('.bg-white.rounded-lg.shadow-lg');
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.classList.add('animate-pulse-fast');
+                    setTimeout(() => {
+                        this.classList.remove('animate-pulse-fast');
+                    }, 1000);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
